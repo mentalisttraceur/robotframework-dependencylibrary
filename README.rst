@@ -55,6 +55,7 @@ You can also depend on the status of a test suite:
 
 .. code:: robotframework
 
+    *** Test cases ***
     Depends on test suite
         Depends on suite  My Test Suite Name
         Log  The rest of the keywords in this test will run as normal.
