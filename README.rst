@@ -1,8 +1,8 @@
 Robot Framework Dependency Library
 ==================================
 
-This simple library allows you to declare that a Robot Framework test
-case depends on another test case or test suite.
+Declare dependencies between tests. Make tests automatically fail based
+on the results of other test cases or test suites.
 
 Although I strongly recommend that people write tests to be independent,
 sometimes, dependencies between tests are the simplest and easiest model
