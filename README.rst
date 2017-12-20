@@ -56,10 +56,8 @@ You can also depend on the status of a test suite:
 .. code:: robotframework
 
     Depends on test suite
-    #Run keyword and expect error
-    #...  Dependency not met: test suite 'test' not found, wanted 'PASS'
-    #...  Depends on suite  test
-    Depends on suite  My Test Suite Name
+        Depends on suite  My Test Suite Name
+        Log  The rest of the keywords in this test will run as normal.
 
 
 Failures
