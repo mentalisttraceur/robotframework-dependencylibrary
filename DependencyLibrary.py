@@ -15,6 +15,9 @@
 from robot.libraries.BuiltIn import BuiltIn
 
 
+__version__ = '1.0.0'
+
+
 # Unique value to represent a "currently executing" status.
 _MID_EXECUTION = object()
 

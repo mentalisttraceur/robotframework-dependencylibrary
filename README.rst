@@ -10,6 +10,13 @@ to implement, and having tests fail-fast if one or more previous test
 cases didn't get the expected result can be beneficial.
 
 
+Versioning
+----------
+
+This library's version numbers follow the `SemVer 2.0.0 specification
+<https://semver.org/spec/v2.0.0.html>`_.
+
+
 Usage
 -----
 
