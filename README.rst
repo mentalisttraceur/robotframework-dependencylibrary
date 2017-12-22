@@ -63,7 +63,7 @@ You can also depend on the status of a test suite:
 .. code:: robotframework
 
     *** Test cases ***
-    Depends on test suite
+    This Test Depends on an Entire Test Suite Passing
         Depends on suite  My Test Suite Name
         Log  The rest of the keywords in this test will run as normal.
 
