@@ -28,9 +28,7 @@ Installation
 Usage
 -----
 
-First, include the library in your tests (if you copied/cloned the
-DependencyLibrary.py from the repository, make sure the directory
-containing it is passed to ``robot`` with the ``--pythonpath`` option):
+First, include the library in your tests:
 
 .. code:: robotframework
 
