@@ -2,21 +2,18 @@
 
 from os import path
 
-from setuptools import setup
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+
+from DependencyLibrary import __version__
 
 project_directory = path.abspath(path.dirname(__file__))
 readme_path = path.join(project_directory, 'README.rst')
-library_path = path.join(project_directory, 'DependencyLibrary.py')
 
-with open(readme_path, encoding='utf-8') as readme_file:
+with open(readme_path) as readme_file:
     long_description = readme_file.read()
-
-with open(library_path, encoding='utf-8') as library_file:
-    for line in library_file:
-        # This is of course extremely fragile, but XP/YAGNI-ing it:
-        if line.startswith('__version__'):
-            exec(line)
-            break
 
 setup(
     name='robotframework-dependencylibrary',

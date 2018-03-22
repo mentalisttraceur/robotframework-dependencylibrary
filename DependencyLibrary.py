@@ -12,34 +12,25 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
-from robot.libraries.BuiltIn import BuiltIn
-
-
 __version__ = '1.0.0'
 
 
-# Unique value to represent a "currently executing" status.
-_MID_EXECUTION = object()
-
-
-# Dependency-resolution logic is external from class to ease testing
-def _depends_on(map, test_case_or_suite, name, status):
-    _status = map.get(name.lower(), None)
-    if _status is None:
-        BuiltIn().fail('Dependency not met: {} {!r} not found, wanted {!r}'
-                       .format(test_case_or_suite, name, status))
-    elif _status is _MID_EXECUTION:
-        BuiltIn().fail('Dependency not met: {} {!r} mid-execution, wanted {!r}'
-                       .format(test_case_or_suite, name, status))
-    elif _status != status:
-        BuiltIn().fail('Dependency not met: {} {!r} state is {!r}, wanted {!r}'
-                       .format(test_case_or_suite, name, _status, status))
-    return True
+def _depends_on(status_map, dependency_type, name, status):
+    _status = status_map.get(name.lower(), None)
+    assert _status is not None, (
+        'Dependency not met: %s %r not found, wanted %r'
+        % (dependency_type, name, status))
+    assert _status is not Ellipsis, (
+        'Dependency not met: %s %r mid-execution, wanted %r'
+        % (dependency_type, name, status))
+    assert _status == status, (
+        'Dependency not met: %s %r state is %r, wanted %r'
+        % (dependency_type, name, _status, status))
 
 
 class DependencyLibrary(object):
     ROBOT_LISTENER_API_VERSION = 3
-    ROBOT_LIBRARY_SCOPE = "GLOBAL"
+    ROBOT_LIBRARY_SCOPE = 'GLOBAL'
 
     def __init__(self):
         self.ROBOT_LIBRARY_LISTENER = self
@@ -47,22 +38,22 @@ class DependencyLibrary(object):
         self._suite_status_map = {}
 
     def _start_test(self, test, result):
-        self._test_status_map[test.name.lower()] = _MID_EXECUTION
+        self._test_status_map[test.name.lower()] = Ellipsis
 
     def _end_test(self, test, result):
         self._test_status_map[test.name.lower()] = result.status
 
     def _start_suite(self, suite, result):
-        self._suite_status_map[suite.name.lower()] = _MID_EXECUTION
+        self._suite_status_map[suite.name.lower()] = Ellipsis
 
     def _end_suite(self, suite, result):
         self._suite_status_map[suite.name.lower()] = result.status
 
     def _depends_on_test(self, name, status='PASS'):
-        return _depends_on(self._test_status_map, 'test case', name, status)
+        _depends_on(self._test_status_map, 'test case', name, status)
 
     def _depends_on_suite(self, name, status='PASS'):
-        return _depends_on(self._suite_status_map, 'test suite', name, status)
+        _depends_on(self._suite_status_map, 'test suite', name, status)
 
     def depends_on_test(self, name):
         return self._depends_on_test(name)
