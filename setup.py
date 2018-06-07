@@ -17,7 +17,7 @@ with open(readme_path) as readme_file:
 
 setup(
     name='robotframework-dependencylibrary',
-    version=__version__,
+    version=__version__ + '.post1',
     description='Declare dependencies between Robot Framework tests',
     long_description=long_description,
     license='0BSD (BSD Zero Clause License)',
