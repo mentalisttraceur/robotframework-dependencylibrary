@@ -5,7 +5,8 @@ Declare dependencies between tests.
 
 Ideally tests are independent, but when tests depend
 on earlier tests, DependencyLibrary makes it easy to
-have them automatically fail or skip in unison.
+explicitly declare these dependencies and have tests
+that depend on each other do the right thing.
 
 
 Versioning
