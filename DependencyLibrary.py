@@ -54,11 +54,6 @@ class DependencyLibrary(object):
     def depends_on_test_failure(self, name):
         return self._depends_on_test(name, 'FAIL')
 
-    # "SKIP" state does not yet exist but is a target feature for
-    # Robot Framework 3.1.
-    #def depends_on_test_skipped(self, name):
-    #    return self.depends_on_test(name, 'SKIP')
-
     def depends_on_suite(self, name):
         return self._depends_on_suite(name)
 
@@ -67,7 +62,3 @@ class DependencyLibrary(object):
 
     def depends_on_suite_failure(self, name):
         return self._depends_on_suite(name, 'FAIL')
-
-    # Not sure if "SKIP" state will apply to suites or just tests:
-    #def depends_on_suite_skipped(self, name):
-    #    return self.depends_on_suite(name, 'SKIP')
