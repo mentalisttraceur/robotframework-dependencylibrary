@@ -1,13 +1,11 @@
 Robot Framework Dependency Library
 ==================================
 
-Declare dependencies between tests. Make tests automatically
-fail based on the results of other test cases or test suites.
+Declare dependencies between tests.
 
-Although I strongly recommend that people write tests to be independent,
-sometimes, dependencies between tests are the simplest and easiest model
-to implement, and having tests fail-fast if one or more previous test
-cases didn't get the expected result can be beneficial.
+Ideally tests are independent, but when tests depend
+on earlier tests, DependencyLibrary makes it easy to
+have them automatically fail or skip in unison.
 
 
 Versioning
@@ -51,7 +49,6 @@ When you need to declare multiple dependencies, just repeat the keyword:
 
 .. code:: robotframework
 
-
     *** Test cases ***
     Another Passing Test
         No operation
@@ -71,40 +68,48 @@ You can also depend on the statuses of entire test suites:
         Log  The rest of the keywords in this test will run as normal.
 
 
-Failures
---------
+Skipped Dependencies
+--------------------
 
-The ``Depends on ...`` keywords fail if the dependency is not
-met, so the test case automatically aborts with a failure
-unless you use something like ``Run keyword and expect error``.
-
-
-Error Messages
---------------
-
-The error messages are considered part of the interface,
-so per `SemVer` the major version number will be bumped
-if the error message format ever changes).
-
-If a test failed when you expected it to pass,
+If a dependency was skipped, the depending test is also skipped:
 
 .. code:: robotframework
 
-    *** Test cases ***
-    A Test that Depends on "Some Test" Passing
-        Depends on test  Some Test
+    Skipped Test
+        Skip  This test is skipped for some reason.
+
+    A Test that Depends on "Skipped Test"
+        Depends on test  Skipped Test
         Log  The rest of the keywords (including this log) will NOT run!
 
-the error message will be::
+The skip message follows this format::
 
-    Dependency not met: test case 'Some Test' state is 'FAIL', wanted 'PASS'
+    Dependency not met: test case 'Skipped Test' status is 'SKIP'.
 
-If `Some Test` was skipped, the error message would be be::
 
-    Dependency not met: test case 'Some Test' state is 'SKIP', wanted 'PASS'
+Failing Dependencies
+--------------------
 
-If you typo a test, or try to depend on the status of a test
-before it has been run, there won't be any status yet,
+If a dependency failed, the depending test also fails:
+
+.. code:: robotframework
+
+    Failing Test
+        Fail  This test failed for some reason.
+
+    A Test that Depends on "Failing Test"
+        Depends on test  Failing Test
+        Log  The rest of the keywords (including this log) will NOT run!
+
+The failure message follows this format::
+
+    Dependency not met: test case 'Failing Test' status is 'FAIL'.
+
+
+Other Failures
+--------------
+
+If refer to a dependency that does not exist or has not been run yet,
 
 .. code:: robotframework
 
@@ -112,11 +117,11 @@ before it has been run, there won't be any status yet,
     A Test that Depends on Missing Test Case
         Depends on test  Another Test
 
-so the error message will be::
+the test will fail and the failure message follows this format::
 
-    Dependency not met: test case 'Another Test' not found, wanted 'PASS'
+    Dependency not met: test case 'Another Test' not found.
 
-If you accidentally make a test depend on itself,
+If you make a test depend on itself or on the suite that contains it,
 
 .. code:: robotframework
 
@@ -124,58 +129,6 @@ If you accidentally make a test depend on itself,
     Depends on self
         Depends on test  Depends on self
 
-the error message will be::
+the test will fail and the failure message follows this format::
 
-    Dependency not met: test case 'Depends on self' mid-execution, wanted 'PASS'
-
-When depending on test suites, the error messages are the same,
-but they use the words "test suite" instead of "test case".
-
-.. note::
-
-    If you need to programmatically parse the error messages, keep in
-    mind that test case and suite names and statuses are quoted using
-    logic equivalent to the Python built-in function ``repr``.
-
-
-Extras
-------
-
-You'll probably never need to, but you can depend on a
-failure or skip of a test or suite instead of success:
-
-.. code:: robotframework
-
-    *** Test cases ***
-    Failing Test
-        Fail  This test always fails
-
-    A Test that Depends on "Failing Test" Failing
-        Depends on test failure  Failing Test
-        Log  The rest of the keywords in this test will run as normal.
-
-    Skipped Test
-        Skip  This test always skips
-
-    A Test that Depends on "Skipped Test" Getting Skipped
-        Depends on test skipped  Skipped Test
-        Log  The rest of the keywords in this test will run as normal.
-
-    A Test that Depends on an Entire Test Suite Failing
-        Depends on suite falure  Another Test Suite Name
-        Log  The rest of the keywords in this test will run as normal.
-
-    A Test that Depends on an Entire Test Suite Getting Skipped
-        Depends on suite skipped  Some Test Suite Name
-        Log  The rest of the keywords in this test will run as normal.
-
-For symmetry with the above, the keywords ``Depends on test success``
-and ``Depends on suite success`` are available as synonyms for
-``Depends on test`` and ``Depends on suite``.
-
-.. code:: robotframework
-
-    *** Test cases ***
-    This Test Depends on "Passing Test" Passing (using alternate keyword)
-        Depends on test success  Passing Test
-        Log  The rest of the keywords in this test will run as normal.
+    Dependency not met: test case 'Depends on self' mid-execution.
