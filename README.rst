@@ -1,8 +1,8 @@
 Robot Framework Dependency Library
 ==================================
 
-Declare dependencies between tests. Make tests automatically fail based
-on the results of other test cases or test suites.
+Declare dependencies between tests. Make tests automatically
+fail based on the results of other test cases or test suites.
 
 Although I strongly recommend that people write tests to be independent,
 sometimes, dependencies between tests are the simplest and easiest model
@@ -13,8 +13,8 @@ cases didn't get the expected result can be beneficial.
 Versioning
 ----------
 
-This library's version numbers follow the `SemVer 2.0.0 specification
-<https://semver.org/spec/v2.0.0.html>`_.
+This library's version numbers follow the `SemVer 2.0.0
+specification <https://semver.org/spec/v2.0.0.html>`_.
 
 
 Installation
