@@ -54,6 +54,9 @@ class DependencyLibrary(object):
     def depends_on_test_failure(self, name):
         return self._depends_on_test(name, 'FAIL')
 
+    def depends_on_test_skipped(self, name):
+        return self._depends_on_test(name, 'SKIP')
+
     def depends_on_suite(self, name):
         return self._depends_on_suite(name)
 
@@ -62,3 +65,6 @@ class DependencyLibrary(object):
 
     def depends_on_suite_failure(self, name):
         return self._depends_on_suite(name, 'FAIL')
+
+    def depends_on_suite_skipped(self, name):
+        return self._depends_on_suite(name, 'SKIP')
