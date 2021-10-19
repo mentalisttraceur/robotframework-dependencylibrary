@@ -5,7 +5,7 @@ from robot.api import SkipExecution as _SkipExecution
 
 
 __all__ = ('DependencyLibrary',)
-__version__ = '2.0.0'
+__version__ = '2.0.1'
 
 
 def _depends_on(status_map, dependency_type, name):

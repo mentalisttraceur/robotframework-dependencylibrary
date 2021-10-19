@@ -33,5 +33,6 @@ setup(
         'Operating System :: OS Independent',
     ],
     py_modules=['DependencyLibrary'],
+    install_requires=['robotframework'],
     requires=['robotframework'],
 )
