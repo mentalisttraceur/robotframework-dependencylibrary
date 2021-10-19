@@ -8,7 +8,7 @@ except ImportError:
 
 
 __all__ = ('DependencyLibrary',)
-__version__ = '2.0.2'
+__version__ = '2.0.3'
 
 
 def _depends_on(status_map, dependency_type, name):

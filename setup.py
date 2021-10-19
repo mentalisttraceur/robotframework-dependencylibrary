@@ -2,10 +2,7 @@
 
 from os import path
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup
 
 from DependencyLibrary import __version__
 
@@ -34,5 +31,4 @@ setup(
     ],
     py_modules=['DependencyLibrary'],
     install_requires=['robotframework'],
-    requires=['robotframework'],
 )
