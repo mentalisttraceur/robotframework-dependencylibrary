@@ -1,11 +1,14 @@
 # SPDX-License-Identifier: 0BSD
 # Copyright 2017 Alexander Kozhevnikov <mentalisttraceur@gmail.com>
 
-from robot.api import SkipExecution as _SkipExecution
+try:
+    from robot.api import SkipExecution as _SkipExecution
+except ImportError:
+    pass
 
 
 __all__ = ('DependencyLibrary',)
-__version__ = '2.0.1'
+__version__ = '2.0.2'
 
 
 def _depends_on(status_map, dependency_type, name):
