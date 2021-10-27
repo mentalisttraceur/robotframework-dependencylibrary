@@ -110,7 +110,7 @@ The failure message follows this format::
 Other Failures
 --------------
 
-If refer to a dependency that does not exist or has not been run yet,
+If you depend on a test or suite that does not exist or has not run yet,
 
 .. code:: robotframework
 
