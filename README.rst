@@ -76,6 +76,7 @@ If a dependency was skipped, the depending test is also skipped:
 
 .. code:: robotframework
 
+    *** Test cases ***
     Skipped Test
         Skip  This test is skipped for some reason.
 
@@ -95,6 +96,7 @@ If a dependency failed, the depending test also fails:
 
 .. code:: robotframework
 
+    *** Test cases ***
     Failing Test
         Fail  This test failed for some reason.
 
