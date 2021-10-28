@@ -22,6 +22,7 @@ def _depends_on(status_map, dependency_type, name):
         return
     if status == 'SKIP':
         raise _SkipExecution(message + ' was skipped.')
+    assert status == 'FAIL', message + ' has status ' + repr(status) + '.'
     raise AssertionError(message + ' failed.')
 
 
