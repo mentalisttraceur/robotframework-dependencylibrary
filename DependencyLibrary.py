@@ -14,8 +14,10 @@ __version__ = '2.0.5'
 def _depends_on(status_map, dependency_type, name):
     message = ' '.join(('Dependency not met:', dependency_type, repr(name)))
     status = status_map.get(name.lower(), None)
-    assert status is not None, message + ' not found.'
-    assert status is not Ellipsis, message + ' mid-execution.'
+    if status is None:
+        raise AssertionError(message + ' not found.')
+    if status is Ellipsis:
+        raise AssertionError(message + ' mid-execution.')
     if status == 'PASS':
         return
     message = ' '.join((message, 'status is', repr(status))) + '.'
