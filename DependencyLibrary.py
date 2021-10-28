@@ -8,7 +8,7 @@ except ImportError:
 
 
 __all__ = ('DependencyLibrary',)
-__version__ = '2.0.5'
+__version__ = '3.0.0'
 
 
 def _depends_on(status_map, dependency_type, name):
@@ -20,10 +20,9 @@ def _depends_on(status_map, dependency_type, name):
         raise AssertionError(message + ' mid-execution.')
     if status == 'PASS':
         return
-    message = message + ' status is ' + repr(status) + '.'
     if status == 'SKIP':
-        raise _SkipExecution(message)
-    raise AssertionError(message)
+        raise _SkipExecution(message + ' was skipped.')
+    raise AssertionError(message + ' failed.')
 
 
 class DependencyLibrary(object):

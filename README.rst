@@ -85,7 +85,7 @@ If a dependency was skipped, the depending test is also skipped:
 
 The skip message follows this format::
 
-    Dependency not met: test case 'Skipped Test' status is 'SKIP'.
+    Dependency not met: test case 'Skipped Test' was skipped.
 
 
 Failing Dependencies
@@ -104,7 +104,7 @@ If a dependency failed, the depending test also fails:
 
 The failure message follows this format::
 
-    Dependency not met: test case 'Failing Test' status is 'FAIL'.
+    Dependency not met: test case 'Failing Test' failed.
 
 
 Other Failures
