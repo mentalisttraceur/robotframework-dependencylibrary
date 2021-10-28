@@ -12,7 +12,7 @@ __version__ = '2.0.5'
 
 
 def _depends_on(status_map, dependency_type, name):
-    message = ' '.join(('Dependency not met:', dependency_type, repr(name)))
+    message = 'Dependency not met: ' + dependency_type + ' ' + repr(name)
     status = status_map.get(name.lower(), None)
     if status is None:
         raise AssertionError(message + ' not found.')
@@ -20,7 +20,7 @@ def _depends_on(status_map, dependency_type, name):
         raise AssertionError(message + ' mid-execution.')
     if status == 'PASS':
         return
-    message = ' '.join((message, 'status is', repr(status))) + '.'
+    message = message + ' status is ' + repr(status) + '.'
     if status == 'SKIP':
         raise _SkipExecution(message)
     raise AssertionError(message)
