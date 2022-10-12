@@ -135,3 +135,24 @@ If you make a test depend on itself or on the suite that contains it,
 the test will fail and the failure message follows this format::
 
     Dependency not met: test case 'Depends on self' mid-execution.
+
+Skip Depending Tests
+--------------------
+
+If a dependency failed, the depending test is skipped:
+
+.. code:: robotframework
+
+    *** Test cases ***
+    Failing Test
+        Fail  This test failed for some reason.
+
+    A Test that Depends on "Failing Test"
+        Depends on test skip  Failing Test
+        Log  The rest of the keywords (including this log) will NOT run!
+
+The skip message follows this format::
+
+    Dependency not met: test case 'A Test that Depends on "Failing Test"' was skipped.
+
+
