@@ -148,11 +148,11 @@ If a dependency failed, the depending test is skipped:
         Fail  This test failed for some reason.
 
     A Test that Depends on "Failing Test"
-        Depends on test skip  Failing Test
+        Skip depending test on fail  Failing Test
         Log  The rest of the keywords (including this log) will NOT run!
 
 The skip message follows this format::
 
-    Dependency not met: test case 'A Test that Depends on "Failing Test"' was skipped.
+    Dependency not met: test case 'A Test that Depends on "Failing Test"' was skipped because dependency failed.
 
 
