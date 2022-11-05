@@ -66,7 +66,7 @@ You can also depend on the statuses of entire test suites:
     *** Test cases ***
     A Test that Depends on an Entire Test Suite Passing
         Depends on suite  Some Test Suite Name
-        Log  The rest of the keywords in this test will run as normal.
+        Log  The rest of the keywords will run if that whole suite passed.
 
 
 Skipped Dependencies
@@ -92,7 +92,8 @@ The skip message follows this format::
 Failing Dependencies
 --------------------
 
-If a dependency failed, the depending test also fails:
+If a dependency failed, the depending test is skipped instead of
+redundantly failing as well:
 
 .. code:: robotframework
 
@@ -104,7 +105,7 @@ If a dependency failed, the depending test also fails:
         Depends on test  Failing Test
         Log  The rest of the keywords (including this log) will NOT run!
 
-The failure message follows this format::
+The skip message follows this format::
 
     Dependency not met: test case 'Failing Test' failed.
 
@@ -120,7 +121,7 @@ If you depend on a test or suite that does not exist or has not run yet,
     A Test that Depends on Missing Test Case
         Depends on test  Another Test
 
-the test will fail and the failure message follows this format::
+the test will warn and the warning message follows this format::
 
     Dependency not met: test case 'Another Test' not found.
 
