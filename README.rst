@@ -118,21 +118,21 @@ If you depend on a test or suite that does not exist or has not run yet,
 .. code:: robotframework
 
     *** Test cases ***
-    A Test that Depends on Missing Test Case
-        Depends on test  Another Test
+    A Test that Depends on "Missing Test"
+        Depends on test  Missing Test
 
 the test will warn and the warning message follows this format::
 
-    Dependency not met: test case 'Another Test' not found.
+    Dependency not met: test case 'Missing Test' not found.
 
 If you make a test depend on itself or on the suite that contains it,
 
 .. code:: robotframework
 
     *** Test cases ***
-    Depends on self
-        Depends on test  Depends on self
+    Depends on Self
+        Depends on test  Depends on Self
 
 the test will warn and the warning message follows this format::
 
-    Dependency not met: test case 'Depends on self' mid-execution.
+    Dependency not met: test case 'Depends on Self' mid-execution.
