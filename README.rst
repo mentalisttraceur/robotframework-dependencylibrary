@@ -133,6 +133,6 @@ If you make a test depend on itself or on the suite that contains it,
     Depends on self
         Depends on test  Depends on self
 
-the test will fail and the failure message follows this format::
+the test will warn and the warning message follows this format::
 
     Dependency not met: test case 'Depends on self' mid-execution.

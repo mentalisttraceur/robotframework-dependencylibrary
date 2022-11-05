@@ -16,7 +16,8 @@ def _depends_on(status_map, dependency_type, name):
         _logger.warn(message + ' not found.')
         return
     if status is Ellipsis:
-        raise AssertionError(message + ' mid-execution.')
+        _logger.warn(message + ' mid-execution.')
+        return
     if status == 'PASS':
         return
     if status == 'SKIP':
