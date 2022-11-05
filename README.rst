@@ -110,8 +110,8 @@ The skip message follows this format::
     Dependency not met: test case 'Failing Test' failed.
 
 
-Other Failures
---------------
+Mistake Warnings
+----------------
 
 If you depend on a test or suite that does not exist or has not run yet,
 
