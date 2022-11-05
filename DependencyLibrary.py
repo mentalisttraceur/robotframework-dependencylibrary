@@ -2,10 +2,7 @@
 # Copyright 2017 Alexander Kozhevnikov <mentalisttraceur@gmail.com>
 
 from robot.api import logger as _logger
-try:
-    from robot.api import SkipExecution as _SkipExecution
-except ImportError:
-    pass
+from robot.api import SkipExecution as _SkipExecution
 
 
 __all__ = ('DependencyLibrary',)
@@ -25,7 +22,7 @@ def _depends_on(status_map, dependency_type, name):
     if status == 'SKIP':
         raise _SkipExecution(message + ' was skipped.')
     assert status == 'FAIL', message + ' has status ' + repr(status) + '.'
-    raise AssertionError(message + ' failed.')
+    raise _SkipExecution(message + ' failed.')
 
 
 class DependencyLibrary(object):
