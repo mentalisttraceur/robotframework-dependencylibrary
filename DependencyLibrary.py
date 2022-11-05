@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: 0BSD
 # Copyright 2017 Alexander Kozhevnikov <mentalisttraceur@gmail.com>
 
+from robot.api import logger as _logger
 try:
     from robot.api import SkipExecution as _SkipExecution
 except ImportError:
@@ -15,7 +16,8 @@ def _depends_on(status_map, dependency_type, name):
     message = 'Dependency not met: ' + dependency_type + ' ' + repr(name)
     status = status_map.get(name.lower(), None)
     if status is None:
-        raise AssertionError(message + ' not found.')
+        _logger.warn(message + ' not found.')
+        return
     if status is Ellipsis:
         raise AssertionError(message + ' mid-execution.')
     if status == 'PASS':
