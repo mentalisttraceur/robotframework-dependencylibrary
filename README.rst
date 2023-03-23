@@ -68,6 +68,10 @@ You can also depend on the statuses of entire test suites:
         Depends on suite  Some Test Suite Name
         Log  The rest of the keywords will run if that whole suite passed.
 
+Note that to depend on a suite or a test from another suite, you must
+either run Robot Framework with ``--listener DependencyLibrary``, or
+that suite must also include ``DependencyLibrary`` in its
+``*** Settings ***``.
 
 Skipped Dependencies
 --------------------
